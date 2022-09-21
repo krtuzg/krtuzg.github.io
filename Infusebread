@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+
+		<style type="text/css">
+			table {
+				border: 0px;
+				background-color: aqua;
+			}
+
+			td {
+				border: 0px;
+			}
+
+			div {
+				background-color: bisque;
+				width: 100px;
+				height: 100px;
+			}
+
+			img {
+				width: 100%;
+				height: 100%;
+				border-radius:20%;
+			}
+		</style>
+	</head>
+	<body>
+		<table id="maintable">
+			<tr id="r1">
+				<td id="r1d1">
+					<div id="r1d1v" onclick="judge(1,1)"><span id="timew" style="color: chartreuse;">20</span></div>
+				</td>
+				<td id="r1d2">
+					<div id="r1d2v" onclick="judge(1,2)"></div>
+				</td>
+				<td id="r1d3">
+					<div id="r1d3v" onclick="judge(1,3)"></div>
+				</td>
+				<td id="r1d4">
+					<div id="r1d4v" onclick="judge(1,4)"></div>
+				</td>
+
+			</tr>
+			<tr id="r2">
+				<td id="r2d1">
+					<div id="r2d1v" onclick="judge(2,1)"></div>
+				</td>
+				<td id="r2d2">
+					<div id="r2d2v" onclick="judge(2,2)"></div>
+				</td>
+				<td id="r2d3">
+					<div id="r2d3v" onclick="judge(2,3)"></div>
+				</td>
+				<td id="r2d4">
+					<div id="r2d4v" onclick="judge(2,4)"></div>
+				</td>
+			</tr>
+			<tr id="r3">
+				<td id="r3d1">
+					<div id="r3d1v" onclick="judge(3,1)"></div>
+				</td>
+				<td id="r3d2">
+					<div id="r3d2v" onclick="judge(3,2)"></div>
+				</td>
+				<td id="r3d3">
+					<div id="r3d3v" onclick="judge(3,3)"></div>
+				</td>
+				<td id="r3d4">
+					<div id="r3d4v" onclick="judge(3,4)"></div>
+				</td>
+			</tr>
+			<tr id="r4">
+				<td id="r4d1">
+					<div id="r4d1v" onclick="judge(4,1)"></div>
+				</td>
+				<td id="r4d2">
+					<div id="r4d2v" onclick="judge(4,2)"></div>
+				</td>
+				<td id="r4d3">
+					<div id="r4d3v" onclick="judge(4,3)"></div>
+				</td>
+				<td id="r4d4">
+					<div id="r4d4v" onclick="judge(4,4)"></div>
+				</td>
+			</tr>
+			<tr id="r5">
+				<td id="r5d1">
+					<div id="r5d1v" onclick="judge(5,1)"></div>
+				</td>
+				<td id="r5d2">
+					<div id="r5d2v" onclick="judge(5,2)"></div>
+				</td>
+				<td id="r5d3">
+					<div id="r5d3v" onclick="judge(5,3)"></div>
+				</td>
+				<td id="r5d4">
+					<div id="r5d4v" onclick="judge(5,4)"></div>
+				</td>
+			</tr>
+			<tr id="r6">
+				<td id="r6d1">
+					<div id="r6d1v"></div>
+				</td>
+				<td id="r6d2">
+					<div id="r6d2v"></div>
+				</td>
+				<td id="r6d3">
+					<div id="r6d3v"></div>
+				</td>
+				<td id="r6d4">
+					<div id="r6d4v"></div>
+				</td>
+			</tr>
+		</table>
+		<script type="text/javascript">
+			var ended = false;
+
+			function selectfrom(lowValue, highValue) {
+				var choice = highValue - lowValue + 1;
+				return Math.floor(Math.random() * choice + lowValue);
+			}
+			var whight, wwidth;
+
+			function init() {
+				whight = window.screen.availHeight;
+				wwidth = window.screen.availWidth;
+				for (i = 0; i < 6; i++) {
+					for (o = 0; o < 4; o++) {
+						document.getElementById("r" + (i + 1) + "d" + (o + 1) + "v").style.width = parseInt(wwidth / 4) + "px";
+						document.getElementById("r" + (i + 1) + "d" + (o + 1) + "v").style.height = parseInt(whight / 6) + "px";
+						document.getElementById("r" + (i + 1) + "d" + (o + 1) + "v").style.backgroundColor = "bisque";
+						document.getElementById("r" + (i + 1) + "d" + (o + 1) + "v").innerHTML =
+							"<img src='https://q1.qlogo.cn/g?b=qq&nk=1826385771&s=640'>";
+
+					}
+
+					if (i < 5) {
+						r = selectfrom(1, 4)
+						document.getElementById("r" + (i + 1) + "d" + r + "v").style.backgroundColor = "chartreuse";
+						document.getElementById("r" + (i + 1) + "d" + r + "v").innerHTML =
+							"<img src='https://q1.qlogo.cn/g?b=qq&nk=3525952677&s=640'>";
+					}
+				}
+
+			};
+
+			var grade = 0;
+
+			var start = false;
+
+			var time = 20;
+
+			function timego() {
+				if (!ended) {
+					if (time != 0) {
+						time--;
+						// document.getElementById("timew").innerHTML = time
+						setTimeout(timego, 1000);
+					} else {
+						if (window.confirm("游戏已屑，分数" + grade + ",点击确定复屑")) {
+							location.reload()
+							ended = true
+						} else {
+							ended = true
+						};
+					}
+				}
+
+			}
+
+			function timew() {
+				if (!start) {
+					start = true;
+					setTimeout(timego, 1000);
+				}
+			}
+
+			function judge(x, y) {
+				if (ended) {
+					if (window.confirm("游戏已屑，分数" + grade + ",点击确定复屑")) {
+						location.reload()
+					} else {
+						ended = true
+					};
+				} else {
+					if (document.getElementById("r" + x + "d" + y + "v").style.backgroundColor == "chartreuse") {
+						grade++
+						next();
+					} else {
+						document.getElementById("r" + x + "d" + y + "v").style.backgroundColor = "red";
+						end()
+					};
+				}
+			}
+
+			function end() {
+				if (window.confirm("分数" + grade + ",点击确定复屑")) {
+					location.reload()
+				} else {
+					ended = true
+				};
+			}
+
+			function next() {
+				if (!start) {
+					timew();
+				}
+				console.log(document.getElementById("r1d1v").style.backgroundColor)
+				for (i = 5; i >= 0; i--) {
+					if (i != 0) {
+						if (i != 5) {
+							for (o = 0; o < 4; o++) {
+								document.getElementById("r" + (i + 1) + "d" + (o + 1) + "v").style.backgroundColor = document
+									.getElementById("r" + i + "d" + (o + 1) + "v").style.backgroundColor;
+								document.getElementById("r" + (i + 1) + "d" + (o + 1) + "v").innerHTML = document
+									.getElementById("r" + i + "d" + (o + 1) + "v").innerHTML;
+							}
+						} else {
+							for (o = 0; o < 4; o++) {
+								if (document
+									.getElementById("r" + i + "d" + (o + 1) + "v").style.backgroundColor == "chartreuse") {
+									document.getElementById("r" + (i + 1) + "d" + (o + 1) + "v").style.backgroundColor = "blue"
+									document.getElementById("r" + (i + 1) + "d" + (o + 1) + "v").innerHTML =
+										"<img src='img/bread.gif'>"
+								} else {
+									document.getElementById("r" + (i + 1) + "d" + (o + 1) + "v").style.backgroundColor = document
+										.getElementById("r" + i + "d" + (o + 1) + "v").style.backgroundColor;
+									document.getElementById("r" + (i + 1) + "d" + (o + 1) + "v").innerHTML = document
+										.getElementById("r" + i + "d" + (o + 1) + "v").innerHTML;
+								}
+
+							}
+						}
+
+					} else {
+						for (o = 0; o < 4; o++) {
+							document.getElementById("r" + (i + 1) + "d" + (o + 1) + "v").style.backgroundColor = "bisque";
+							document.getElementById("r" + (i + 1) + "d" + (o + 1) + "v").innerHTML ="<img src='https://q1.qlogo.cn/g?b=qq&nk=1826385771&s=640'>";
+
+						}
+						r = selectfrom(1, 4)
+						document.getElementById("r" + (i + 1) + "d" + r + "v").style.backgroundColor = "chartreuse";
+						document.getElementById("r" + (i + 1) + "d" + r + "v").innerHTML =
+							"<img src='https://q1.qlogo.cn/g?b=qq&nk=3525952677&s=640'>";
+
+					}
+				}
+			}
+			init();
+		</script>
+	</body>
+</html>
