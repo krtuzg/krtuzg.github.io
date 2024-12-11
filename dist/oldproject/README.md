@@ -1,1 +1,0 @@
-# krtuzg.github.io
